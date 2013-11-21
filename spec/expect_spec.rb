@@ -5,15 +5,12 @@ gem 'minitest', '5.0.8'
 gem 'wrong', '0.7.1'
 
 require 'minitest/autorun'
-require 'wrong/adapters/minitest'
+require 'wrong/assert'
+require 'wrong/helpers'
 
 Wrong.config.alias_assert :expect
 
-# Make wrong work for MT5
-class Minitest::Spec
-  include Wrong::Assert
-  include Wrong::Helpers
-end
+require_relative 'wrong_mt5'
 
 describe "expect with wrong" do
 
@@ -27,7 +24,6 @@ describe "expect with wrong" do
 
   it "Object has no freedom patches" do
     deny { 1.respond_to?(:must_equal) }
-    assert { rescuing { 1.must_equal 1 }.class == NoMethodError }
   end
 
 end
