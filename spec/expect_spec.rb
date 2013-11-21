@@ -26,4 +26,8 @@ describe "expect with wrong" do
     deny { 1.respond_to?(:must_equal) }
   end
 
+  it "assert_equal still works" do
+    assert_equal 1, 1
+  end
+
 end
